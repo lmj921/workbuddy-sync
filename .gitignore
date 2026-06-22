@@ -39,6 +39,10 @@
 !connectors-marketplace/
 !connectors-marketplace/*.json
 
+# ── 双机同步脚本 ──
+!scripts/
+!scripts/**/*
+
 # ── 工作区状态（轻量 JSON） ──
 !workspace-state.json
 !user-state.json

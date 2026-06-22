@@ -1,0 +1,23 @@
+{
+  "id": "github-trending",
+  "name": "GitHub Trending 周报",
+  "prompt": "每周 GitHub Trending 分析报告。执行步骤：\n\n1. 抓取 GitHub Trending 页面数据（daily/weekly/monthly 三个维度）\n2. 读取上周数据文件 data/week_YYYY_WW.json 作为基线\n3. 用黄仁勋五层 AI 产业模型（Energy → Chips → Infrastructure → Models → Applications）对项目进行分类，L4 Models 和 L5 Applications 内部做软件工程细分（Agent框架/工程平台/垂直应用/消费应用）\n4. 对比上周排名，计算排名变化（↑N / ↓N / NEW / —）\n5. 生成深色主题 HTML 可视化报告（github_trending_report.html），每个项目带 GitHub 链接\n6. 保存本周排名数据到 data/week_YYYY_WW.json 供下周对比\n7. 通过企微 Webhook 私聊推送报告摘要给 Joker（chatid: jokerlu, key: 78fa51e9-438c-484f-a823-1769ee9b4cbc）",
+  "status": "ACTIVE",
+  "scheduleType": "recurring",
+  "nextRunAt": 1782694200000,
+  "lastRunAt": 1782099768674,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/github_trending"
+  ],
+  "rrule": "FREQ=WEEKLY;BYDAY=MO;BYHOUR=9;BYMINUTE=0",
+  "modelId": "glm-5.1-ioa",
+  "modelIsThinking": true,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "createdAt": 1774593956600,
+  "updatedAt": 1782099768677
+}

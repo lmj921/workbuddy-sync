@@ -1,0 +1,67 @@
+# ============================================================
+# Maple 端游项目 — TAPD 催单配置
+# ============================================================
+
+project:
+  name: "Maple"
+  workspace_id: "20453876"
+
+tapd:
+  mcp_url: "http://mcp-idc.tapd.woa.com/mcp/"
+  oauth_token: "80d1dae090ef95d77589a8bf3b23207c"
+  username: "jokerlu"
+
+wechat:
+  robot_key: "78fa51e9-438c-484f-a823-1769ee9b4cbc"
+  pm_id: "jokerlu"
+
+rules:
+
+  # Story 催单
+  - type: story
+    name_keyword: "maple_A1"
+    skip_statuses:
+      - "status_5"       # 待验收
+      - "status_7"       # 验收通过
+      - "status_9"       # 挂起
+      - "status_10"      # 无需测试
+      - "status_12"      # 暂时无法测试
+      - "resolved"       # 已完成
+      - "rejected"       # 已拒绝
+    status_map:
+      planning: "规划中"
+      developing: "实现中"
+      resolved: "已完成"
+      rejected: "已拒绝"
+      status_5: "待验收"
+      status_7: "验收通过"
+      status_8: "测试中"
+      status_9: "挂起"
+      status_10: "无需测试"
+      status_12: "暂时无法测试"
+    message_template:
+      title: "⏰ Maple Story 催单提醒"
+      footer: |
+        📌 **状态操作说明：**
+        > 1. 正在做的 → 请转到「**实现中**」
+        > 2. 已完成的 → 请转到「**待验收**」并备注"无须测试"
+
+  # Bug 催单（后续启用）
+  # - type: bug
+  #   name_keyword: ""
+  #   skip_statuses:
+  #     - "closed"
+  #     - "rejected"
+  #   status_map:
+  #     new: "新建"
+  #     in_progress: "处理中"
+  #     resolved: "已解决"
+  #     closed: "已关闭"
+  #     rejected: "已拒绝"
+  #   message_template:
+  #     title: "🐛 Maple Bug 催单提醒"
+  #     footer: |
+  #       📌 请尽快修复超期 Bug
+
+log:
+  dir: "tapd_reminder_log"

@@ -1,0 +1,23 @@
+{
+  "id": "automation-2",
+  "name": "每日自我进化",
+  "prompt": "执行 self-improving-agent skill 的完整自我改进流程：1) 读取今天的工作日志（当前 workspace 的 memory 目录下的当日 .md 文件）和全局 MEMORY.md；2) 分析今天所有的工作经验，提取可复用的 pattern；3) 对踩坑、反复试错的经历重点总结；4) 将新 pattern 写入 self-improving-agent 的 memory 目录；5) 如有需要，更新相关 skill 文件中的指导内容；6) 生成简要的每日改进摘要，追加到当日工作日志中。",
+  "status": "PAUSED",
+  "scheduleType": "recurring",
+  "nextRunAt": 1781193600000.0022,
+  "lastRunAt": 1781149258998,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/20260320102012"
+  ],
+  "rrule": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR,SA,SU;BYHOUR=0;BYMINUTE=0",
+  "modelId": "claude-opus-4.6",
+  "modelIsThinking": false,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "createdAt": 1773994616346,
+  "updatedAt": 1781320206438
+}

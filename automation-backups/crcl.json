@@ -1,0 +1,23 @@
+{
+  "id": "crcl",
+  "name": "CRCL 周报",
+  "prompt": "生成 Circle (CRCL) 周度投资分析报告。\n\n## 数据采集（必须执行）\n\n使用 westock-data skill 获取以下数据：\n1. CRCL 实时行情（quote）\n2. 最近 30 个交易日日K线（kline）\n3. 技术指标（MACD、KDJ、RSI、BOLL）\n4. 资金流向数据\n\n使用 web search 补充：\n- CRCL 本周重要新闻（稳定币法案进展、USDC 流通量、合作伙伴、机构动态）\n- 分析师评级变动\n- 加密货币/稳定币行业动态\n- 宏观经济事件对加密板块影响\n\n## 情绪分析（必须执行）\n\n使用 sentiment-news-analyzer skill 对 CRCL 进行新闻情绪分析：\n- 执行：\"分析 CRCL 最近一周的新闻情绪\"\n- 将情绪评分（看多/看空/中性）、关键事件摘要、情绪趋势变化纳入报告的「新闻情绪」板块\n- 特别关注：稳定币法案进展（CLARITY Act / GENIUS Act）、USDC 流通量变化、机构持仓动态、加密行业监管政策\n\n## 综合决策（必须执行）\n\n使用 trading-decision-integrator skill 对 CRCL 给出综合交易决策：\n- 执行：\"综合分析 CRCL 该怎么操作\"（传入持仓 10 股 @ $104.65，成本 $1,046.50，已卖出 10 股 @ $103.15 收回 $1,031.50）\n- 整合技术面、基本面、情绪面、资金面的多维度信号\n- 输出多空辩论结论、综合评分、具体操作建议（买入/持有/减仓/止损）\n- 将综合决策结论纳入报告的「综合决策」板块\n\n## 技术分析\n\n基于采集的K线和技术指标数据：\n- 周线级别趋势判断（MA5/MA10/MA20/MA60）\n- MACD 周线信号（金叉/死叉、柱状图趋势）\n- KDJ 超买超卖判断\n- RSI 强弱判断\n- BOLL 通道位置\n- 关键支撑位和阻力位标注\n- 成交量分析（放量/缩量、量价配合）\n\n## 报告结构\n\n生成 Markdown 报告，包含以下板块：\n1. **周度概览**：本周涨跌幅、关键价格、成交额\n2. **持仓盈亏**：当前 10 股的浮盈浮亏、整体投资回报（含已卖出部分）\n3. **技术分析**：趋势、指标信号、支撑阻力\n4. **基本面动态**：USDC 流通量、稳定币市场份额、公司业务进展\n5. **新闻情绪**：情绪评分、关键事件、情绪趋势（来自 sentiment-news-analyzer）\n6. **综合决策**：多空辩论、综合评分、操作建议（来自 trading-decision-integrator）\n7. **催化剂跟踪**：稳定币法案进展、Q1 财报预期、机构动态\n8. **操作建议**：具体买卖点位、仓位建议、止损止盈更新\n\n报告保存到：/Users/a1_builder/WorkBuddy/stock-analysis/CRCL-weekly/ 目录，文件名格式 CRCL_周报_YYYYMMDD.md\n\n## 企微推送\n\n报告完成后，使用 curl 推送摘要到企微私聊：\n```bash\ncurl -s 'https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=78fa51e9-438c-484f-a823-1769ee9b4cbc&debug=1' \\\n  -H 'Content-Type: application/json' \\\n  -d '{\"chatid\":\"jokerlu\",\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"📊 **CRCL 周报 (日期)**\\n> 收盘价: $XX | 周涨跌: X%\\n> 持仓盈亏: 10股 浮盈/亏 $XX (X%)\\n> 情绪评分: XX（看多/看空/中性）\\n> 综合决策: XX（买入/持有/减仓）\\n> 技术信号: XX\\n> 关键催化: XX\\n> 操作建议: XX\"}}'\n```",
+  "status": "PAUSED",
+  "scheduleType": "recurring",
+  "nextRunAt": 1777773600000,
+  "lastRunAt": 1777169354804,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/stock-analysis"
+  ],
+  "rrule": "FREQ=WEEKLY;BYDAY=SU;BYHOUR=10;BYMINUTE=0",
+  "modelId": "glm-5.1-ioa",
+  "modelIsThinking": true,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "createdAt": 1773925255676,
+  "updatedAt": 1781320206438
+}

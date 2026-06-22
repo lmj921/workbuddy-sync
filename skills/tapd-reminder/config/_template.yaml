@@ -1,0 +1,78 @@
+# ============================================================
+# TAPD 催单配置模板
+# 复制此文件为 "你的项目名.yaml"，修改下方配置即可使用
+# ============================================================
+
+# 项目基本信息
+project:
+  name: "项目名称"                    # 显示名称，会出现在消息标题和日志中
+  workspace_id: "00000000"            # TAPD 项目 ID
+
+# TAPD 连接配置
+tapd:
+  mcp_url: "http://mcp-idc.tapd.woa.com/mcp/"
+  oauth_token: "你的OAUTH-TOKEN"      # TAPD MCP 认证 Token
+  username: "你的用户名"               # TAPD 用户名
+
+# 企微通知配置
+wechat:
+  robot_key: "你的机器人KEY"           # 企微机器人 Webhook Key
+  pm_id: "你的企微ID"                 # PM 企微 ID（接收汇总 + 测试模式收件人）
+
+# 催单规则（可配置多个，每个对应一种工作项类型）
+rules:
+
+  # === Story 催单规则 ===
+  - type: story
+    name_keyword: ""                  # 标题关键词（模糊匹配），留空 = 不过滤
+    skip_statuses:                    # 这些状态不催单（根据项目实际状态调整）
+      - "status_9"                    # 挂起
+      - "resolved"                    # 已完成
+      - "rejected"                    # 已拒绝
+    status_map:                       # 状态 ID → 中文映射（根据项目自定义状态配置）
+      planning: "规划中"
+      developing: "实现中"
+      resolved: "已完成"
+      rejected: "已拒绝"
+    message_template:
+      title: "⏰ {project_name} Story 催单提醒"
+      footer: |
+        📌 请尽快处理超期工作项
+
+  # === Bug 催单规则（取消注释启用）===
+  # - type: bug
+  #   name_keyword: ""
+  #   skip_statuses:
+  #     - "closed"
+  #     - "rejected"
+  #   status_map:
+  #     new: "新建"
+  #     in_progress: "处理中"
+  #     resolved: "已解决"
+  #     closed: "已关闭"
+  #     rejected: "已拒绝"
+  #   message_template:
+  #     title: "🐛 {project_name} Bug 催单提醒"
+  #     footer: |
+  #       📌 请尽快修复超期 Bug
+
+  # === Task 催单规则（取消注释启用）===
+  # - type: task
+  #   name_keyword: ""
+  #   skip_statuses:
+  #     - "done"
+  #     - "rejected"
+  #   status_map:
+  #     open: "未开始"
+  #     progressing: "进行中"
+  #     done: "已完成"
+  #     rejected: "已拒绝"
+  #   message_template:
+  #     title: "📋 {project_name} Task 催单提醒"
+  #     footer: |
+  #       📌 请尽快完成超期任务
+
+# 日志配置
+log:
+  dir: "tapd_reminder_log"            # 日志目录（相对于执行时的工作目录）
+  format: "{date}_{time}.md"          # 日志文件名格式

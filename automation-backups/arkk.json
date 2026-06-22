@@ -1,0 +1,23 @@
+{
+  "id": "arkk",
+  "name": "ARKK 每日日报",
+  "prompt": "按照 arkk-tracker skill 的日报工作流生成今天的 ARKK 每日跟踪报告。具体步骤：1）确认今天是否为美股交易日（跳过周末和美国节假日）；2）从 cathiesark.com 获取今日 ARK 交易数据；3）从 Yahoo Finance 获取 ARKK 行情、前10大持仓股票新闻；4）获取道琼斯和纳斯达克收盘数据；5）参照 /Users/a1_builder/WorkBuddy/20260313204723/arkk-tracker/arkk-tracker/references/daily_template.md 模板格式生成日报，保存到 /Users/a1_builder/WorkBuddy/arkk-tracker/daily/arkk_YYYYMMDD.md；6）使用 openpyxl 更新 /Users/a1_builder/WorkBuddy/arkk-tracker/arkk_records.xlsx。如果今天不是交易日，直接跳过不生成报告。",
+  "status": "PAUSED",
+  "scheduleType": "recurring",
+  "nextRunAt": 1777597200000,
+  "lastRunAt": 1777511282836,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/arkk-tracker"
+  ],
+  "rrule": "FREQ=WEEKLY;BYDAY=TU,WE,TH,FR,SA;BYHOUR=9;BYMINUTE=0",
+  "modelId": "glm-5.1-ioa",
+  "modelIsThinking": true,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "createdAt": 1773481066292,
+  "updatedAt": 1781320206438
+}

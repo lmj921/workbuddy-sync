@@ -1,0 +1,52 @@
+# === WorkBuddy 双机 Git 同步 ===
+# 策略：白名单模式 —— 默认忽略一切，只放行需要同步的纯文本文件
+# workbuddy.db (34MB+ SQLite) 绝对不能进 Git，改一行就整个文件变，秒冲突
+
+# ── 忽略所有 ──
+*
+
+# ── 允许 .gitignore 自身 ──
+!.gitignore
+!.gitattributes
+
+# ── 身份 & 全局配置（纯文本） ──
+!SOUL.md
+!USER.md
+!IDENTITY.md
+!MEMORY.md
+!settings.json
+!argv.json
+
+# ── MCP 连接器配置 ⚠️ 含凭证，确保仓库为 Private ──
+!mcp.json
+!.mcp.json
+
+# ── 用户级 Skills（都是 SKILL.md + 脚本，天然 Git 友好） ──
+!skills/
+!skills/**/*
+
+# ── Automation JSON 备份（纯文本，解决了 workbuddy.db 不能 Git 的问题） ──
+!automation-backups/
+!automation-backups/*.json
+
+# ── 全局记忆 & 计划 ──
+!memory/
+!memory/**
+!plans/
+!plans/**
+
+# ── 连接器市场配置 ──
+!connectors-marketplace/
+!connectors-marketplace/*.json
+
+# ── 工作区状态（轻量 JSON） ──
+!workspace-state.json
+!user-state.json
+
+# ── 排除系统/缓存/垃圾文件（即使命中白名单也不跟踪） ──
+.DS_Store
+__pycache__/
+*.pyc
+*.bak
+# 排除 symlink（如 self-improving-agent -> ~/.agents/...，不能跨机器）
+skills/self-improving-agent

@@ -1,0 +1,23 @@
+{
+  "id": "rblx-3",
+  "name": "美股持仓日报",
+  "prompt": "生成美股持仓日报，覆盖5只股票，输出格式与港股持仓日报完全相同的HTML暗色风格。\n\n## 持仓信息\n- RBLX(罗布乐思): 40股 @ $77均价（$92/$82/$72/$62各10股），成本$3,080\n- FIG(Figma): 32股 @ $39.686，成本$1,269.95\n- HOOD(Robinhood): 25股 @ $86.78，成本$2,169.50\n- LULU(Lululemon): 6股 @ $206.4，成本$1,238.40\n- MRVL(Marvell): 11股 @ $275.468，成本$3,030.15\n\n## Step 1: 数据获取\n用 westock-data skill 获取5只股票的实时数据（美股代码格式 usRBLX,usFIG,usHOOD,usLULU,usMRVL）：\n1. `quote usRBLX,usFIG,usHOOD,usLULU,usMRVL` — 实时行情\n2. `technical usRBLX,usFIG,usHOOD,usLULU,usMRVL --group ma,macd` — 均线+MACD\n3. `technical usRBLX,usFIG,usHOOD,usLULU,usMRVL --group rsi,boll,wr,bias` — RSI/BOLL/WR/BIAS\n4. `kline usRBLX,usFIG,usHOOD,usLULU,usMRVL --period day --limit 20` — 近20日K线\n5. `usfund usRBLX,usFIG,usHOOD,usLULU,usMRVL` — 美股卖空数据\n6. `news usRBLX,usFIG,usHOOD,usLULU,usMRVL --limit 8 --type 2` — 近期新闻\n若 westock-data 批量查询失败，逐只单独查询。\n\n## Step 2: 大盘环境\n用 WebSearch 获取：道琼斯/标普500/纳斯达克/VIX 最新行情，美联储/宏观要闻，科技股/AI板块动态\n\n## Step 3: sentiment-news-analyzer 情绪分析\n对5只股票执行情绪分析（多源新闻采集→情绪评分-100到+100→关键事件摘要）\n- 情绪评分 >+30 利好 / -30~+30 中性 / <-30 利空\n\n## Step 4: 综合交易决策\n使用 trading-decision-integrator skill 对每只股票给出综合交易决策：\n- 整合技术面+基本面+资金面+情绪面→多空辩论→综合评分→BUY/SELL/HOLD\n- 传入每只股票的持仓数量和成本\n\n## Step 5: 🎯 精确次日交易计划（必须！）\n每只股票必须输出精确交易表格：\n| 方向 | 价位 | 操作 | 数量 |\n|------|------|------|------|\n| 卖出 | ≥XXX | 减仓/止盈 | X股 |\n| 买入 | XXX-XXX | 加仓/建仓 | X股 |\n| 持有 | XXX-XXX | 观望不动 | — |\n| 止损 | <XXX | 止损/清仓 | 全部 |\n\n关键位说明：\n- 开盘站回/跌破哪个均线 = 什么信号\n- 事件催化落地后该怎么操作\n- 已有浮盈的必须明确减仓/锁利价位和数量\n- 止损位必须精确\n- 操作优先级排序：1=最高优先（次日必须执行），依次递减\n\n## Step 6: 生成HTML报告\n输出到 /Users/a1_builder/WorkBuddy/stock-analysis/US-daily/YYYY-MM-DD.html\n\n### HTML格式要求（与港股日报完全一致）：\n- 暗色主题（#0d1117背景）\n- 卡片式布局，圆角12px\n- 每只股票一张卡片，包含：\n  - 行情数据（metrics网格）\n  - 技术面（MA/MACD/RSI/BOLL/WR/BIAS）\n  - 资金面（卖空比/卖空股数）\n  - 新闻情绪（情绪评分条+关键事件列表）\n  - 综合决策（decision-box）\n  - 📋 次日交易计划表格（trade-table样式）\n- 顶部大盘环境卡片\n- 底部汇总表（所有股票一行总结+明日操作）\n- 末尾免责声明\n- 中国股市惯例：涨=红色(#f85149)，跌=绿色(#3fb950)\n\n## RBLX 关注点\n- 深度套牢，距52周低$41.75仅几美元\n- 止损线$40硬止损 / $42-44紧急减仓10-20股\n- Q1财报已出（DAU Miss+指引下调，严重利空）\n- 加仓冻结至DAU趋势明朗\n- 反弹减仓：$50-55减10股 / $55-58减10股\n- 止盈：$68-72减10股 / $80-85卖10股 / $100+卖10股\n\n## FIG 关注点\n- Figma 2025年IPO，设计SaaS龙头\n- 关注：DAU增长、企业客户ARR、AI功能渗透率、与Adobe竞争格局\n- 技术面根据实际数据判断\n\n## HOOD 关注点\n- 券商+加密货币交易平台\n- 关注：活跃用户数、加密交易量、利率敏感度、欧洲扩张\n- 技术面根据实际数据判断\n\n## LULU 关注点\n- 高端运动服饰，品牌溢价\n- 关注：同店销售、库存水平、中国扩张、产品创新\n- 技术面根据实际数据判断\n\n## MRVL 关注点\n- AI半导体/数据中心芯片\n- 关注：数据中心收入增速、AI定制芯片进展、与AVGO竞争、库存周期\n- 技术面根据实际数据判断\n\n## 企微推送\n不推送",
+  "status": "ACTIVE",
+  "scheduleType": "recurring",
+  "nextRunAt": 1782177600000,
+  "lastRunAt": 1781919761365,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/stock-analysis"
+  ],
+  "rrule": "FREQ=WEEKLY;BYDAY=TU,WE,TH,FR,SA;BYHOUR=9;BYMINUTE=30",
+  "modelId": "deepseek-v4-pro-ioa",
+  "modelIsThinking": true,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "createdAt": 1774407094180,
+  "updatedAt": 1781919761370
+}

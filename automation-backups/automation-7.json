@@ -1,0 +1,26 @@
+{
+  "id": "automation-7",
+  "name": "每日选股扫描",
+  "prompt": "# 每日选股扫描报告\n\n生成日期格式：YYYY-MM-DD，报告保存为 /Users/a1_builder/WorkBuddy/stock-analysis/daily-screening/YYYY-MM-DD.html\n\n## 执行步骤\n\n### Step 1: 多市场筛选（用 westock-tool skill）\n用 westock-tool 进行条件选股，覆盖 A股 + 港股 + 美股三个市场：\n\n**A股维度**（至少3个）：\n1. 技术突破：MACD金叉 + 量比>1.5 + 涨幅3-8%\n2. 业绩催化：最近财报净利增速>20% + PE<30\n3. 资金关注：主力净流入 + 换手率3-10%\n\n**港股维度**（至少2个）：\n1. 低估值高增长：PE<15 + 净利增速>15%\n2. 南向资金：近5日净流入 + 技术面转强\n注意：港股字段名用 PeTtm（非 PE_TTM），小盘居多需放宽条件\n\n**美股维度**（至少1个）：\n1. 技术强势：MACD金叉 + 成交量放大 + 趋势向上\n\n### Step 2: 技术面深度筛选\n对筛选出的候选股，用 westock-data 的 technical 和 kline 命令检查：\n- MACD（金叉/死叉）\n- 均线排列（多头/空头）\n- 布林带位置\n- KDJ 超买超卖\n每个维度 pass/fail，至少3/4正面才进入下一步\n\n### Step 3: 情绪分析（用 sentiment-news-analyzer skill）\n对技术面通过的标的，逐一进行新闻情绪分析：\n- 多源新闻采集 → 情绪评分（-100 到 +100）\n- 情绪 <-30 直接排除\n- +30 以上正面标记，-30~+30 中性标记\n\n### Step 4: westock-partner 高手点评 🆕\n对最终精选 Top 5 的 A股/港股标的（美股跳过此步），用 westock-partner skill 让相关高手基于已有数据给出简评：\n\n**高手选择规则**（每只股票选2-3位最相关高手）：\n- 文仔（估值派）：PE/PB/股息率等估值维度突出的 → 文仔看估值是否合理\n- 洲仔（资金信号）：量比>2、主力净流入明显、换手率高的 → 洲仔看资金面持续性\n- 钊仔（基本面）：财报业绩驱动、盈利增速高的 → 钊仔看基本面质量\n- 星仔（产业趋势）：行业政策催化、板块轮动标的 → 星仔看产业逻辑\n- 磊仔（短线）：技术突破、短线信号强的 → 磊仔看短线操作节奏\n- 坤仔（逆向）：跌幅大但可能有反转、逆向思维标的 → 坤仔看逆向机会\n\n**输出格式**（每只股票）：\n```\n🎯 搭子说两句\n  📊 文仔：[2-3句估值点评，如\"PE5.8显著低估，股息2%有安全垫\"]\n  💰 洲仔：[2-3句资金点评，如\"量比1.5温和放量，主力持续流入看好\"]\n```\n\n**注意**：\n- 只对 A股/港股标的做高手点评（westock-partner 不覆盖美股）\n- 点评要基于前面步骤已获取的数据，不要重复拉取\n- 简评为主，2-3句/人，不需要完整圆桌讨论\n\n### Step 5: 综合交易决策（用 trading-decision-integrator skill）\n对所有最终精选标的，逐一进行综合交易决策：\n- 整合技术面/基本面/资金面/情绪面 → 多空辩论 → 综合评分\n- 输出 BUY/SELL/WATCH + 具体价位 + 仓位建议 + 置信度\n- 评分≥70 BUY / 60-69 WATCH / <60 AVOID\n\n## HTML 报告格式要求\n- 深色主题（#0d1117 背景），与现有报告风格一致\n- 每只精选标的一个 stock-card，包含：\n  1. 基本信息（名称/代码/市场/价格/涨幅/评分徽章）\n  2. 指标 metrics（成交额/PE/量比/股息率/5日涨幅等）\n  3. 分析三栏：技术面 | 情绪面 | 综合决策\n  4. **🆕 搭子说两句**：在 analysis-grid 下方、decision-bar 上方，添加高手点评区域\n     - 样式：浅色背景圆角卡片（background:#1c2333; border-radius:8px; padding:12px）\n     - 每位高手一行，emoji+名字+点评内容\n     - 只对 A股/港股标的显示此区域\n  5. 决策底栏（BUY/WATCH/AVOID 渐变背景）\n- 候选池表格（技术面通过但未精选的）\n- 高风险警示区域\n- 市场情绪总结\n\n**搭子态度列**：在候选池表格中增加\"搭子态度\"列（仅A股/港股行有值），内容为高手共识方向（看多/看空/中性/—）\n\n## 数据来源\n- westock-tool：条件选股筛选\n- westock-data：行情/技术/资金数据\n- sentiment-news-analyzer：新闻情绪\n- westock-partner：高手点评（A股/港股）\n- trading-decision-integrator：综合决策\n\n## 推送\n- 不推送企微（仅保存 HTML 报告）\n\n## 踩坑经验\n- 港股 PE 字段名用 PeTtm，不用 PE_TTM\n- 港股小盘居多，PE/市值条件需适当放宽\n- 21:00 美股已开盘，可用当日实时数据\n- westock-partner 只覆盖 A股/港股，美股跳过高手点评",
+  "status": "PAUSED",
+  "scheduleType": "recurring",
+  "nextRunAt": 1776941700000.0015,
+  "lastRunAt": 1776856093593,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/stock-analysis"
+  ],
+  "rrule": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR;BYHOUR=19;BYMINUTE=0",
+  "validFrom": "",
+  "validUntil": "",
+  "modelId": "deepseek-v4-pro-ioa",
+  "modelIsThinking": true,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "permissionMode": "fullAccess",
+  "createdAt": 1775116175060,
+  "updatedAt": 1781439077574
+}

@@ -1,0 +1,24 @@
+{
+  "id": "automation-1779527692172",
+  "name": "微信小游戏榜单日报",
+  "prompt": "微信小游戏榜单每日追踪任务。\n\n请执行以下流程：\n1. 运行命令: cd /Users/a1_builder/WorkBuddy/mini_game && /Users/a1_builder/.workbuddy/binaries/python/envs/default/bin/python3 scripts/main.py\n2. 如果执行失败，通过企微推送告警消息\n3. 检查执行结果，确认60条数据（3榜×20条）是否全部采集成功\n4. 记录执行日志到 /Users/a1_builder/WorkBuddy/mini_game/.workbuddy/memory/ 当天的记忆文件\n\n注意：\n- 脚本会自动完成：采集→存储→分析→企微推送→Excel存档\n- 如果当天已有数据会跳过采集直接分析\n- 企微推送使用私聊模式(chatid: jokerlu)",
+  "status": "ACTIVE",
+  "scheduleType": "recurring",
+  "nextRunAt": 1782183300000.0015,
+  "lastRunAt": 1782097370275,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/mini_game"
+  ],
+  "rrule": "FREQ=DAILY;BYHOUR=11;BYMINUTE=0",
+  "modelId": "deepseek-v4-pro-ioa",
+  "modelIsThinking": true,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "permissionMode": "fullAccess",
+  "createdAt": 1779527692172,
+  "updatedAt": 1782097370277
+}

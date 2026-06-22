@@ -1,0 +1,23 @@
+{
+  "id": "rblx",
+  "name": "RBLX 周报",
+  "prompt": "执行 RBLX（Roblox）周度持仓分析报告，覆盖过去一周行情回顾和下周展望。\n\n## 持仓信息\n- 标的：US.RBLX（Roblox Corporation）\n- 持仓：40 股 @ $77 均价（分四笔：$92、$82、$72、$62 各 10 股），总成本 $3,080\n- 止损线：$48（跌破52周低点$50.10后确认收盘，减仓50%）\n- 止盈1：$80-85（回本区间，卖10股）\n- 止盈2：$100+（再卖10股）\n\n## 数据采集（必须执行）\n1. 使用 westock-data skill 获取：\n   - RBLX 实时行情（quote）\n   - 20日K线数据（kline）\n   - 技术指标（MACD/KDJ/RSI/BOLL）\n   - 资金流向\n2. 使用 web search 补充：\n   - 本周重大新闻和公告\n   - 分析师评级变动\n   - 行业/竞品动态\n   - 大盘环境（纳指/标普走势）\n\n## 情绪分析（必须执行）\n使用 sentiment-news-analyzer skill 对 RBLX 进行新闻情绪分析：\n- 执行：\"分析 RBLX 最近一周的新闻情绪\"\n- 将情绪评分（看多/看空/中性）、关键事件摘要、情绪趋势变化纳入报告的「新闻情绪」板块\n- 特别关注：菲律宾监管进展、财报预期、用户数据、竞品动态等关键催化\n\n## 综合决策（必须执行）\n使用 trading-decision-integrator skill 对 RBLX 给出综合交易决策：\n- 执行：\"综合分析 RBLX 该怎么操作\"（传入持仓 40 股 @ $77，成本 $3,080）\n- 整合技术面、基本面、情绪面、资金面的多维度信号\n- 输出多空辩论结论、综合评分、具体操作建议（买入/持有/减仓/止损）\n- 将综合决策结论纳入报告的「综合决策」板块\n\n## 报告结构\n生成 Markdown 周报，包含：\n1. 本周行情回顾（价格/涨跌/成交/技术形态）\n2. 新闻情绪分析（情绪评分 + 关键事件 + 趋势变化）\n3. 技术面分析（MACD/KDJ/RSI/BOLL/支撑阻力）\n4. 基本面与催化剂跟踪\n5. 综合决策（多空辩论 + 综合评分 + 操作建议）\n6. 持仓盈亏更新\n7. 下周展望与操作计划\n8. 风险提示\n\n## 输出\n- 报告保存到：/Users/a1_builder/WorkBuddy/stock-analysis/RBLX-weekly/RBLX_周报_YYYYMMDD.md\n- 通过企微 Webhook 推送摘要（私聊模式，chatid=jokerlu）：\n  - Webhook: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=78fa51e9-438c-484f-a823-1769ee9b4cbc&debug=1\n  - 格式：{\"chatid\":\"jokerlu\",\"msgtype\":\"markdown\",\"markdown\":{\"content\":\"...\"}}\n  - 摘要内容：本周涨跌、持仓盈亏、情绪评分、综合决策结论、关键催化、下周策略",
+  "status": "PAUSED",
+  "scheduleType": "recurring",
+  "nextRunAt": 1777773600000,
+  "lastRunAt": 1777169082550,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/stock-analysis"
+  ],
+  "rrule": "FREQ=WEEKLY;BYDAY=SU;BYHOUR=10;BYMINUTE=0",
+  "modelId": "glm-5.1-ioa",
+  "modelIsThinking": true,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "createdAt": 1773924561294,
+  "updatedAt": 1781320206438
+}

@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "tapd": {
+      "url": "http://mcp-idc.tapd.woa.com/mcp/",
+      "headers": {
+        "OAUTH-TOKEN": "80d1dae090ef95d77589a8bf3b23207c",
+        "X-USERNAME": "jokerlu",
+        "X-Tools-Set": "lookup_tapd_tool,lookup_tool_param_schema,proxy_execute_tool",
+        "X-Keep-Links": "true"
+      }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "enabledPlugins": {
+    "finance-data@cb_teams_marketplace": true,
+    "document-skills@cb_teams_marketplace": true,
+    "agent-browser@codebuddy-plugins-official": true,
+    "playwright-cli@codebuddy-plugins-official": true,
+    "find-skills@codebuddy-plugins-official": true,
+    "skills-sec-audit@codebuddy-plugins-official": true,
+    "weixinpay@workbuddy-builtin": true,
+    "self-assess-plugin@HRIT-EmpService": true
+  },
+  "claw": {
+    "channels": {
+      "weixinBot": {
+        "enabled": true,
+        "connectionMode": "webhook",
+        "registration": {
+          "webhookUrl": "",
+          "sessionId": ""
+        },
+        "channelId": "48a5e277aa70@im.bot"
+      },
+      "wechatmp": {
+        "enabled": true,
+        "connectionMode": "webhook",
+        "registration": {
+          "webhookUrl": "",
+          "sessionId": "663c0e0f-50ec-41a4-97de-cac58f2a4245_695df45d6ea08e888faab9802e5672d5b4cd754dd4a5c8ef70ac8a2271b3f905_fdc34bebba0ebe46cc62183b48b5dfd576f21ad8e1a1faf449face98559e4d6a"
+        },
+        "channelId": "663c0e0f-50ec-41a4-97de-cac58f2a4245::origin::wechatmpProxy"
+      },
+      "weixinClawBot": {
+        "enabled": true,
+        "channelId": "48a5e277aa70@im.bot",
+        "connectionMode": "websocket",
+        "botToken": "48a5e277aa70@im.bot:060000d555a18406d51e78bde86e6620154958",
+        "baseUrl": "https://ilinkai.weixin.qq.com",
+        "accountId": "48a5e277aa70@im.bot",
+        "userId": "o9cq8095_fvyzwFrf9pLEA_XGdCQ@im.wechat",
+        "registration": {
+          "webhookUrl": ""
+        }
+      },
+      "wecomIOA": {
+        "enabled": true
+      }
+    },
+    "users": {},
+    "legacyOwnerUid": "663c0e0f-50ec-41a4-97de-cac58f2a4245"
+  },
+  "sandbox": {
+    "extraAllowWrite": [
+      "~/.tencent-cloudq",
+      "~/.andonq",
+      "~/.xiaoe-cloud",
+      "~/.config/wecom/",
+      "~/.lark-cli",
+      "~/.lark-channel/",
+      "~/.dws",
+      "/tmp/dws-cache",
+      "~/.tmeet",
+      "~/Library/Application Support/tmeet"
+    ]
+  }
+}

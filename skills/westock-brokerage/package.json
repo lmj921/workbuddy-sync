@@ -1,0 +1,12 @@
+{
+  "name": "westock-brokerage",
+  "version": "1.0.0",
+  "description": "券商研究观点聚合与分析工具",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "bin": {
+    "westock-brokerage": "./scripts/index.js"
+  }
+}

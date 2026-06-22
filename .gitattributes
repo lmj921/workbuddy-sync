@@ -1,0 +1,6 @@
+# 确保 Markdown 和 JSON 文件使用 LF 换行，避免 Mac 间差异
+*.md text eol=lf
+*.json text eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+SKILL.md text eol=lf

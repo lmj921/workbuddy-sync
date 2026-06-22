@@ -1,0 +1,23 @@
+{
+  "id": "tapd-16",
+  "name": "TAPD催单-16点",
+  "prompt": "执行 Maple 项目的 TAPD 催单。运行命令：cd /Users/a1_builder/WorkBuddy/Claw && python3 /Users/a1_builder/.workbuddy/skills/tapd-reminder/scripts/tapd_reminder.py --config /Users/a1_builder/.workbuddy/skills/tapd-reminder/config/maple.yaml",
+  "status": "PAUSED",
+  "scheduleType": "recurring",
+  "nextRunAt": 1776326400000,
+  "lastRunAt": 1776240415024,
+  "cwds": [
+    "/Users/a1_builder/WorkBuddy/automation-claw-20260328002911"
+  ],
+  "rrule": "FREQ=WEEKLY;BYDAY=MO,TU,WE,TH,FR,SA;BYHOUR=16;BYMINUTE=0",
+  "modelId": "minimax-m2.7-ioa",
+  "modelIsThinking": true,
+  "skills": [],
+  "pushToWeChat": false,
+  "ownerUserId": "663c0e0f-50ec-41a4-97de-cac58f2a4245",
+  "ownerStatus": "inferred",
+  "ownerSource": "history_unique",
+  "connectorIds": [],
+  "createdAt": 1774076288740,
+  "updatedAt": 1776909928117
+}
